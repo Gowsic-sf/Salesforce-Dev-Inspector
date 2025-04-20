@@ -16,7 +16,7 @@ A Chrome extension to help Salesforce developers inspect Flows, edit records, an
 *Upload these images to see them here.*
 
 ## Privacy Policy
-See our [Privacy Policy](https://gowsic-sf.github.io/Salesforce-Dev-Inspector/privacy-policy.html) for how we handle data.
+See our [Privacy Policy](https://gowsic-sf.github.io/Salesforce-Dev-Inspector/privacyPolicy.html) for how we handle data.
 
 ## License
 [MIT License](LICENSE)
