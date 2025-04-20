@@ -1,5 +1,4 @@
 # Salesforce-Dev-Inspector
-# Salesforce Dev Inspector
 
 A Chrome extension to help Salesforce developers inspect Flows, edit records, and manage users.
 
