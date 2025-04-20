@@ -22,4 +22,4 @@ See our [Privacy Policy](https://gowsic-sf.github.io/Salesforce-Dev-Inspector/pr
 [MIT License](LICENSE)
 
 ## Contact
-For help, email [gowsicamutha28@gmail.com] or open an issue here.
+For help, email [gowsicamutha28@gmail.com].
