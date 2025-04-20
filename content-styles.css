@@ -1,0 +1,681 @@
+/* Inspector Panel */
+.sf-inspector-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Dark Mode Styles */
+  .sf-inspector-panel.dark-mode {
+    background: #1e1e1e;
+    border-color: #444;
+    color: #eee;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sf-inspector-panel.collapsed {
+    transform: translateY(calc(100% - 40px));
+  }
+  
+  /* Header actions - container for dark mode toggle */
+  .sf-header-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+  
+  /* Dark mode toggle button */
+  .sf-mode-toggle {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .sf-mode-toggle.dark {
+    background: #444;
+    color: #fff;
+  }
+  
+  .sf-mode-toggle:hover {
+    background: #0070d2;
+    color: white;
+  }
+  
+  .sf-inspector-toggle {
+    padding: 8px 12px;
+    background: #0070d2;
+    color: white;
+    border: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .sf-inspector-content {
+    padding: 15px;
+    overflow-y: auto;
+    max-height: calc(80vh - 40px);
+  }
+  
+  .sf-inspector-content h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #16325c;
+  }
+  
+  .dark-mode .sf-inspector-content h3 {
+    color: #e6e6e6;
+  }
+  
+  /* Tabs */
+  .sf-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+  }
+  
+  .dark-mode .sf-tabs {
+    border-bottom-color: #555;
+  }
+  
+  .sf-tab-btn {
+    background: none;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #54698d;
+    position: relative;
+  }
+  
+  .dark-mode .sf-tab-btn {
+    color: #aaa;
+  }
+  
+  .sf-tab-btn.active {
+    color: #0070d2;
+  }
+  
+  .dark-mode .sf-tab-btn.active {
+    color: #4aa9ff;
+  }
+  
+  .sf-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #0070d2;
+  }
+  
+  .dark-mode .sf-tab-btn.active::after {
+    background: #4aa9ff;
+  }
+  
+  .sf-tab-content {
+    display: none;
+  }
+  
+  .sf-tab-content.active {
+    display: block;
+  }
+  
+  /* Fields display */
+  .sf-search-container {
+    margin-bottom: 15px;
+  }
+  
+  #sf-field-search {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  .dark-mode #sf-field-search {
+    background-color: #333;
+    border-color: #555;
+    color: #eee;
+  }
+  
+  .sf-fields-container {
+    overflow-y: auto;
+    max-height: calc(80vh - 150px);
+  }
+  
+  .sf-field-row {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+  }
+  
+  .dark-mode .sf-field-row {
+    border-color: #444;
+    background-color: #2e2e2e;
+  }
+  
+  .sf-field-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  
+  .sf-field-label-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin-right: auto;
+  }
+  
+  .sf-field-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .sf-field-api {
+    font-size: 12px;
+    color: #666;
+    word-break: break-all;
+  }
+  
+  .dark-mode .sf-field-api {
+    color: #8fa8d5;
+  }
+  
+  .sf-field-type {
+    font-size: 0.75em;
+    color: #706e6b;
+    background: #e8e8e8;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-right: 8px;
+  }
+  
+  .dark-mode .sf-field-type {
+    color: #bbb;
+    background: #444;
+  }
+  
+  .sf-field-value {
+    word-break: break-word;
+    padding: 5px 0;
+  }
+  
+  .sf-field-copy-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 2px 5px;
+  }
+  
+  /* Actions */
+  .sf-actions-container {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .sf-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .sf-btn-primary {
+    background: #0070d2;
+    color: white;
+  }
+  
+  .sf-btn-secondary {
+    background: #e6e5e5;
+    color: #16325c;
+  }
+  
+  .dark-mode .sf-btn-secondary {
+    background: #444;
+    color: #e6e6e6;
+  }
+  
+  .sf-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Status messages */
+  .sf-status-container {
+    margin-top: 15px;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  
+  .sf-status-container.success {
+    background: #4bca81;
+    color: white;
+  }
+  
+  .sf-status-container.error {
+    background: #ff9e9e;
+    color: #c23934;
+  }
+  
+  .dark-mode .sf-status-container.success {
+    background: #2a7d4a;
+  }
+  
+  .dark-mode .sf-status-container.error {
+    background: #8c2a25;
+    color: #ffd2d2;
+  }
+  
+  /* Utils */
+  .hidden {
+    display: none;
+  }
+  
+  .sf-loading {
+    color: #706e6b;
+    font-style: italic;
+  }
+  
+  .dark-mode .sf-loading {
+    color: #aaa;
+  }
+  
+  .sf-error {
+    color: #c23934;
+  }
+  
+  .dark-mode .sf-error {
+    color: #ff9e9e;
+  }
+  
+  .sf-null {
+    color: #706e6b;
+    font-style: italic;
+  }
+  
+  .dark-mode .sf-null {
+    color: #aaa;
+  }
+  
+  code {
+    background: #f1f1f1;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+  
+  .dark-mode code {
+    background: #333;
+    color: #eee;
+  }
+  
+  /* SOQL Query container styling */
+  .sf-soql-container {
+    margin-bottom: 10px;
+    position: relative;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #f8f8f8;
+  }
+  
+  .dark-mode .sf-soql-container {
+    border-color: #555;
+    background-color: #2e2e2e;
+  }
+  
+  .sf-soql-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .sf-soql-header label {
+    font-weight: bold;
+    color: #444;
+    font-size: 12px;
+  }
+  
+  .dark-mode .sf-soql-header label {
+    color: #ddd;
+  }
+  
+  .sf-soql-query {
+    width: 100%;
+    min-height: 80px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    font-family: monospace;
+    font-size: 12px;
+    resize: vertical;
+    overflow-y: auto;
+    color: #333;
+    cursor: text;
+  }
+  
+  .dark-mode .sf-soql-query {
+    background-color: #333;
+    border-color: #555;
+    color: #eee;
+  }
+  
+  .sf-soql-query:focus {
+    outline: none;
+    border-color: #0070d2;
+    box-shadow: 0 0 3px rgba(0, 112, 210, 0.25);
+  }
+  
+  .sf-soql-query::selection {
+    background-color: #c9e6ff;
+  }
+  
+  .dark-mode .sf-soql-query::selection {
+    background-color: #265583;
+  }
+  
+  #sf-copy-soql-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  #sf-copy-soql-btn:hover {
+    background-color: rgba(0, 112, 210, 0.1);
+  }
+  
+  .dark-mode #sf-copy-soql-btn:hover {
+    background-color: rgba(74, 169, 255, 0.2);
+  }
+  
+  #sf-copy-soql-btn:active {
+    background-color: rgba(0, 112, 210, 0.2);
+  }
+  
+  .dark-mode #sf-copy-soql-btn:active {
+    background-color: rgba(74, 169, 255, 0.3);
+  }
+  
+  /* Add some spacing below the SOQL container */
+  .sf-search-container {
+    margin-top: 12px;
+  }
+  
+  /* General panel styling improvements */
+  .sf-inspector-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 400px;
+    max-height: 80vh;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  /* Dark mode styles for Salesforce page when inspector is in dark mode */
+  .sf-dark-mode-applied .slds-modal__container,
+  .sf-dark-mode-applied .slds-modal__header,
+  .sf-dark-mode-applied .slds-modal__content,
+  .sf-dark-mode-applied .slds-modal__footer {
+    filter: invert(0.85) hue-rotate(180deg);
+  }
+  
+  .sf-dark-mode-applied img,
+  .sf-dark-mode-applied svg {
+    filter: invert(1) hue-rotate(180deg);
+  }
+  
+  .sf-inspector-panel.collapsed {
+    width: auto;
+    height: auto;
+  }
+  
+  .sf-inspector-toggle {
+    background-color: #0070d2;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 1;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .sf-inspector-content {
+    overflow-y: auto;
+    max-height: calc(80vh - 40px);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sf-inspector-panel.collapsed .sf-inspector-content {
+    display: none;
+  }
+  
+  /* Status message styling */
+  .sf-status-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    background-color: #f8f8f8;
+    opacity: 0.9;
+  }
+  
+  .sf-status-container.success {
+    background-color: #e3f3ec;
+    color: #2e7d32;
+  }
+  
+  .dark-mode .sf-status-container.success {
+    background-color: #1b4a29;
+    color: #a3e9c9;
+  }
+  
+  .sf-status-container.error {
+    background-color: #fef0f0;
+    color: #d32f2f;
+  }
+  
+  .dark-mode .sf-status-container.error {
+    background-color: #4a1f1f;
+    color: #ffb8b8;
+  }
+  
+  .sf-status-container.hidden {
+    display: none;
+  }
+  .sf-field-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #fff;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    border-top: 1px solid #ddd;
+  }
+  .sf-inspector-panel.dark-mode .sf-field-actions {
+    background-color: #333;
+    border-top: 1px solid #555;
+  }
+  .sf-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .sf-btn-primary {
+    background-color: #0066cc;
+    color: white;
+  }
+  .sf-btn-secondary {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .sf-inspector-panel.dark-mode .sf-btn-secondary {
+    background-color: #555;
+    color: #fff;
+  }
+  .sf-field-non-editable .sf-display-value {
+    color: #888;
+    cursor: not-allowed;
+  }
+  .sf-field-non-editable .sf-field-value {
+    background-color: #f8f8f8;
+  }
+  .sf-inspector-panel.dark-mode .sf-field-non-editable .sf-field-value {
+    background-color: #444;
+  }
+  .sf-input-error {
+    border: 1px solid red !important;
+    background-color: #ffe6e6;
+  }
+  .sf-tab-content {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .sf-fields-scrollable {
+    max-height: calc(70vh - 200px);
+    overflow-y: auto;
+    padding-bottom: 10px;
+  }
+  .sf-flow-container {
+    padding: 10px;
+  }
+  .sf-flow-elements {
+    margin-bottom: 10px;
+  }
+  .sf-flow-element {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+  }
+  .sf-flow-element.nested {
+    margin-left: 20px;
+    border-left: 2px dashed #888;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-element {
+    background-color: #444;
+    border-color: #555;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-element.nested {
+    border-left-color: #aaa;
+  }
+  .sf-flow-element:hover {
+    background-color: #e0e0e0;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-element:hover {
+    background-color: #555;
+  }
+  .sf-flow-element-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sf-flow-element-type {
+    font-size: 0.8em;
+    color: #666;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-element-type {
+    color: #aaa;
+  }
+  .sf-flow-element-connector {
+    font-style: italic;
+    color: #888;
+    margin-top: 5px;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-element-connector {
+    color: #bbb;
+  }
+  .sf-flow-details {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-details {
+    background-color: #333;
+    border-color: #555;
+  }
+  .sf-flow-details h4 {
+    margin: 10px 0 5px;
+  }
+  .sf-flow-details ul {
+    margin: 5px 0;
+    padding-left: 20px;
+  }
+  .sf-flow-details li {
+    margin-bottom: 5px;
+  }
+  .sf-flow-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+  }
+  .sf-flow-details th, .sf-flow-details td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-details th, .sf-inspector-panel.dark-mode .sf-flow-details td {
+    border-color: #555;
+  }
+  .sf-flow-details th {
+    background-color: #f4f4f4;
+  }
+  .sf-inspector-panel.dark-mode .sf-flow-details th {
+    background-color: #444;
+  }
