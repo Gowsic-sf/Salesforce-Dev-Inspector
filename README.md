@@ -8,6 +8,7 @@ A Chrome extension to help Salesforce developers inspect Flows, edit records, an
 - Search and show user info (ID, Name, Email).
 - Toggle dark mode.
 - Copy data to clipboard.
+- Copy SOQL Query
 
 ## How to Use
 - Open a Salesforce page to see the "Dev Inspector" panel.
